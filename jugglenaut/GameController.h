@@ -21,12 +21,47 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+typedef enum
+{
+  kGameStateReady = 0,
+  kGameStateRunning = 1,
+  kGameStatePaused = 2,
+  kGameStateOver = 3
+}kGameState;
 
-@property (strong, nonatomic) UIWindow *window;
+@interface GameController : NSObject
+{
+  NSUserDefaults *    settings;   //stores the users settings
+  kGameState m_state;
+  kGameState m_prevState;
+}
 
+- (kGameState)state;
+
+- (BOOL)isReady;
+- (BOOL)isRunning;
+- (BOOL)isPaused;
+- (BOOL)isOver;
+
+- (void)setReady;
+- (void)setRunning;
+- (void)setPaused;
+- (void)setOver;
+
+//singleton function
++ (instancetype)sharedGameController;
+
+//***data saving functions (self explanatory)
+- (void)saveData;
+- (void)loadData;
+- (void)resetData;
+
+//***settings saving functions (self explanatory)
+- (void)saveSettings;
+- (void)loadSettings;
+- (void)setSettings;
+- (void)resetSettings;
 
 @end
-

@@ -23,10 +23,35 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+typedef enum
+{
+  kPauseOptionResume = 0,
+  kPauseOptionRetry = 1,
+  kPauseOptionExit = 2
+}kPauseOption;
 
-@property (strong, nonatomic) UIWindow *window;
+@class PausedViewController;
 
+@protocol PausedViewControllerDelegate <NSObject>
+
+@optional
+- (void)pausedViewController:(PausedViewController *)sender didExitWithOption:(kPauseOption)aOption;
 
 @end
 
+@interface PausedViewController : UIViewController
+{
+  
+}
+
+@property (nonatomic, assign) id<PausedViewControllerDelegate> delegate;
+
+- (IBAction)buttonResumePressed:(id)sender;
+- (IBAction)buttonRetryPressed:(id)sender;
+- (IBAction)buttonExitPressed:(id)sender;
+
+- (void)showInViewController:(UIViewController *)aViewController;
+
+- (BOOL)isShowing;
+
+@end

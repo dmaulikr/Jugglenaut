@@ -21,12 +21,20 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
+#import <SceneKit/SceneKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface nt_ball : SK3DNode
+{
+  
+}
 
-@property (strong, nonatomic) UIWindow *window;
++ (instancetype)ballWithSceneNamed:(NSString *)aSceneName viewPortSize:(CGSize)aSize;
 
+- (SCNNode *)body;
+
+- (void)kickAtLocation:(CGPoint)aLocation;
+
+- (void)update:(CFTimeInterval)aCurrentTime;
 
 @end
-
